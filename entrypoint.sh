@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INPUT_CONFIG_PATH="$1"
+REPORT_PATH="$2"
 CONFIG=""
 
 # check if a custom config have been provided
@@ -20,7 +21,7 @@ elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit_list.txt
   echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG
-  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG)
+  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt --report-format json --report-path $REPORT_PATH $CONFIG)
 fi
 
 exit 0
