@@ -8,6 +8,9 @@ inputs:
     description: 'Path to config (relative to $GITHUB_WORKSPACE)'
     required: false
     default: '.github/.gitleaks.toml'
+  report-path:
+    required: false
+    default: '/tmp/gitleaks.json'
 outputs:
   result: # id of output
     description: 'Gitleaks log output'
