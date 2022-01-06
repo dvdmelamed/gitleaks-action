@@ -4,6 +4,7 @@ INPUT_CONFIG_PATH="$1"
 REPORT_PATH="$2"
 CONFIG=""
 
+
 # check if a custom config have been provided
 if [ -f "$GITHUB_WORKSPACE/$INPUT_CONFIG_PATH" ]; then
   CONFIG=" --config-path=$GITHUB_WORKSPACE/$INPUT_CONFIG_PATH"
