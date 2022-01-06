@@ -23,6 +23,8 @@ then
   CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG)
 fi
 
+exit 0
+
 # if [ $? -eq 1 ]
 # then
 #   GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
