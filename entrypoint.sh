@@ -25,4 +25,18 @@ then
   CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt --report-format json --report-path $REPORT_PATH $CONFIG)
 fi
 
+if [ $? -eq 1 ]
+  GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
+else
+  GITLEAKS_RESULT=$(echo -e "\e[32m✅ SUCCESS! Your code is good to go!")
+fi
+
+echo "$GITLEAKS_RESULT"
+echo "::set-output name=exitcode::$GITLEAKS_RESULT"
+echo "----------------------------------"
+echo "$CAPTURE_OUTPUT"
+echo "::set-output name=result::$CAPTURE_OUTPUT"
+echo "----------------------------------"
+echo -e $DONATE_MSG
+
 exit 0
