@@ -35,6 +35,8 @@ else
 fi
 
 CAPTURE_OUTPUT=$(cat $REPORT_PATH)
+echo "gitleaks_result=$CAPTURE_OUTPUT" >> $GITHUB_ENV
+
 
 echo "$GITLEAKS_RESULT"
 echo "::set-output name=exitcode::$GITLEAKS_RESULT"
