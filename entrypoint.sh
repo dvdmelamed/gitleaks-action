@@ -39,6 +39,7 @@ echo "::set-output name=result::$CAPTURE_OUTPUT"
 echo "----------------------------------"
 echo -e $DONATE_MSG
 
-ls /tmp
+ls /report
+
 
 exit 0
