@@ -17,33 +17,12 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
   echo gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --report-format json --report-path $GITHUB_WORKSPACE/$REPORT_PATH $CONFIG
-  gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --report-format json --report-path $GITHUB_WORKSPACE/$REPORT_PATH $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --report-format json --report-path $GITHUB_WORKSPACE/$REPORT_PATH $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit_list.txt
   echo gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG
-  gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt --report-format json --report-path $REPORT_PATH $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt --report-format json --report-path $REPORT_PATH $CONFIG)
 fi
 
-ls $GITHUB_WORKSPACE
-
 exit 0
-
-# if [ $? -eq 1 ]
-# then
-#   GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
-#   echo "$GITLEAKS_RESULT"
-#   echo "::set-output name=exitcode::$GITLEAKS_RESULT"
-#   echo "----------------------------------"
-#   echo "$CAPTURE_OUTPUT"
-#   echo "::set-output name=result::$CAPTURE_OUTPUT"
-#   echo "----------------------------------"
-#   echo -e $DONATE_MSG
-#   exit 1
-# else
-#   GITLEAKS_RESULT=$(echo -e "\e[32m✅ SUCCESS! Your code is good to go!")
-#   echo "$GITLEAKS_RESULT"
-#   echo "::set-output name=exitcode::$GITLEAKS_RESULT"
-#   echo "------------------------------------"
-#   echo -e $DONATE_MSG
-# fi
