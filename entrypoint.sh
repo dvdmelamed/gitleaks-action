@@ -26,6 +26,7 @@ then
 fi
 
 if [ $? -eq 1 ]
+then
   GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
 else
   GITLEAKS_RESULT=$(echo -e "\e[32m✅ SUCCESS! Your code is good to go!")
