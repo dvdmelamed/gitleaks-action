@@ -14,6 +14,8 @@ echo running gitleaks "$(gitleaks version) with the following command👇"
 
 DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring me or donating a little something\n\e[36mhttps://github.com/sponsors/zricethezav\n\e[36mhttps://www.paypal.me/zricethezav\n"
 
+REPORT_PATH = /tmp/$REPORT_PATH
+
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
   echo gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --report-format json --report-path $REPORT_PATH $CONFIG
@@ -39,7 +41,8 @@ echo "::set-output name=result::$CAPTURE_OUTPUT"
 echo "----------------------------------"
 echo -e $DONATE_MSG
 
-ls /report
+ls $REPORT_PATH
+mv $REPORT_PATH /github/workflow
 
 
 exit 0
