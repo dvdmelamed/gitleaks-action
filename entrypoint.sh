@@ -39,6 +39,7 @@ echo "::set-output name=result::$CAPTURE_OUTPUT"
 echo "----------------------------------"
 echo -e $DONATE_MSG
 
-ls /tmp
+mv /tmp/$REPORT_PATH $GITHUB_WORKSPACE
+ls $GITHUB_WORKSPACE
 
 exit 0
