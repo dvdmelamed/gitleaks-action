@@ -25,6 +25,8 @@ then
   CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt --report-format json --report-path $REPORT_PATH $CONFIG)
 fi
 
+ls
+
 exit 0
 
 # if [ $? -eq 1 ]
