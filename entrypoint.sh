@@ -34,6 +34,8 @@ else
   GITLEAKS_RESULT=$(echo -e "\e[32m✅ SUCCESS! Your code is good to go!")
 fi
 
+CAPTURE_OUTPUT=$(cat $REPORT_PATH)
+
 echo "$GITLEAKS_RESULT"
 echo "::set-output name=exitcode::$GITLEAKS_RESULT"
 echo "----------------------------------"
@@ -41,8 +43,7 @@ echo "::set-output name=result::$CAPTURE_OUTPUT"
 echo "----------------------------------"
 echo -e $DONATE_MSG
 
-ls $REPORT_PATH
-mv $REPORT_PATH /github/workflow
+
 
 
 exit 0
