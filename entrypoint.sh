@@ -43,6 +43,8 @@ echo "::set-output name=exitcode::$GITLEAKS_RESULT"
 echo "----------------------------------"
 echo "::set-output name=result::$(echo $CAPTURE_OUTPUT)"
 echo "----------------------------------"
+echo "::set-env name=GITLEAKS_RESULT::$(echo $CAPTURE_OUTPUT)"
+echo "----------------------------------"
 echo -e $DONATE_MSG
 
 
